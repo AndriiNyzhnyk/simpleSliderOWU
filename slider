@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>slider</title>
+    <style>
+        #monitor {
+            width: 500px;
+            height: 300px;
+            border: 2px solid red;
+            overflow: hidden;
+        }
+        #slider {
+            height: 100%;
+            transition: 1s;
+        }
+        img {
+            display: block;
+            float: left;
+            height: 100%;
+            width: 500px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="monitor">
+    <div id="slider">
+        <img src="http://cdn.acidcow.com/pics/20130114/nice_girls_22.jpg" alt="">
+        <img src="http://img.over-blog-kiwi.com/0/82/53/64/20140508/ob_c65730_for-grossman.jpg" alt="">
+        <img src="http://cdn.acidcow.com/pics/20130114/nice_girls_22.jpg" alt="">
+        <img src="http://img.over-blog-kiwi.com/0/82/53/64/20140508/ob_c65730_for-grossman.jpg" alt="">
+        <img src="http://img.over-blog-kiwi.com/0/82/53/64/20140508/ob_c65730_for-grossman.jpg" alt="">
+    </div>
+
+</div>
+
+
+<script>
+    var slider = document.getElementById("slider");
+    var imgs = slider.children;
+    var sumWidth = 0;
+    for (img of imgs) {
+        let computedStyle = getComputedStyle(img);
+        let width = parseInt(computedStyle.width);
+        sumWidth += width;
+    }
+    slider.style.width = sumWidth + "px";
+    var shift = sumWidth / slider.children.length;
+    var copyShift = shift;
+    let interval = setInterval(function () {
+        slider.style.marginLeft = -shift + "px";
+        shift += copyShift;
+        if (shift >= sumWidth) {
+            shift = 0;
+        }
+    }, 2000);
+</script>
+</body>
+</html>
